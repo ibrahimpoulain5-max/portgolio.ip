@@ -1409,6 +1409,40 @@ ul, ol, dl { margin: 0; padding: 0; list-style: none; }
 .contact__note h3 { margin-bottom: 6px; font-size: .92rem; }
 .contact__note p { color: var(--muted); font-size: .84rem; line-height: 1.55; }
 
+.contact__session {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: linear-gradient(145deg, rgba(255,255,255,.04), rgba(255,255,255,.01)), var(--surface);
+}
+.contact__session img {
+  display: block;
+  width: clamp(112px, 32%, 148px);
+  height: auto;
+  flex: none;
+  padding: 4px;
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 12px;
+  background: #fff;
+}
+.contact__session figcaption {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: .84rem;
+  line-height: 1.55;
+}
+.contact__session-label {
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
 /* Formulaire ---------- */
 .form {
   border: 1px solid var(--border);
