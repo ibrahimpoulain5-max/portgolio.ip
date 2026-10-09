@@ -227,7 +227,7 @@
                  '<span class="cv__place">' + esc(e.place) + '</span>' +
                  (e.detail ? '<p class="cv__detail">' + esc(e.detail) + '</p>' : '') +
                '</li>';
-      }).join('') : '<li class="cv__item">Pas encore d’expérience professionnelle.</li>';
+      }).join('') : '<li class="cv__item">Aucune autre expérience renseignée pour le moment.</li>';
     }
 
     var cert = document.getElementById('cvCertifications');
