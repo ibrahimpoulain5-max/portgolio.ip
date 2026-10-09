@@ -1,130 +1,140 @@
 /* ============================================================
-   DATA.JS — TOUT LE CONTENU DU SITE EST ICI
-   Modifie ce fichier uniquement : le HTML ne bouge pas.
-   Remplace chaque "À compléter" par tes vraies informations.
+   DATA.JS — Contenu du portfolio.
+   Garde uniquement les informations qui correspondent à ton parcours.
    ============================================================ */
 
 const SITE = {
-
-  /* ---------- IDENTITÉ ---------- */
   profile: {
-    firstName: "Ibrahim",          // ← Ton prénom
-    lastName: "POULAIN",              // ← Ton nom
-    initials: "IP",               // ← Initiales (logo)
-    status: "Étudiant en informatique",
-    domain: "Développement · Réseaux · Cybersécurité",
-    tagline: "Je conçois des applications fiables, j'administre des infrastructures et je pense sécurité dès la première ligne de code.",
-    location: "Toulouse, France",      // ← Ta ville
-    email: "ibrahimpoulain5@gmail.com ",  // ← Ton email
-    available: "Recherche un stage"   // ← Badge de statut
+    firstName: "Ibrahim",
+    lastName: "POULAIN",
+    initials: "IP",
+    status: "Élève au lycée Simone de Beauvoir",
+    domain: "Formation CIEL · informatique · réseaux · électronique",
+    tagline: "Le numérique me passionne et je m’y intéresse aussi chez moi à travers des projets personnels. En première CIEL, j’approfondis mes connaissances en informatique, réseaux, cybersécurité et électronique.",
+    location: "Toulouse, France",
+    email: "ibrahimpoulain5@gmail.com",
+    available: "En apprentissage"
   },
 
-  /* ---------- RÉSEAUX ---------- */
   links: {
-    github:   "",                 // ← ex: "https://github.com/tonpseudo"
-    linkedin: "",                 // ← ex: "https://linkedin.com/in/tonpseudo"
-    portfolio:"",                 // ← site perso / Dev.to / autre
-    phone:    ""                  // ← ex: "+33 6 00 00 00 00"
+    github: "",
+    linkedin: "",
+    portfolio: "",
+    phone: "07 69 63 95 46"
   },
 
-  /* ---------- À PROPOS ---------- */
   about: {
     intro: [
-      "Étudiant en informatique, je construis des projets concrets qui couvrent tout le cycle du développement : conception, codage, déploiement et sécurisation.",
-      "Mon intérêt principal se porte sur le développement web et logiciel, complété par une solide culture réseau et Linux qui me permet de comprendre l'ensemble de la chaîne technique.",
-      "Je cherche actuellement un stage pour mettre en pratique mes compétences dans une équipe exigeante et apprendre auprès de professionnels."
+      "Je suis élève au lycée Simone de Beauvoir, à Gragnague, en première CIEL (Cybersécurité, Informatique et réseaux, Électronique), après une seconde MTNE. Le numérique me passionne et je m’y intéresse aussi chez moi à travers des projets personnels.",
+      "J’ai également effectué un stage chez ACTIA AUTOMOTIVE, une expérience très enrichissante et agréable. Je souhaite continuer à développer mes compétences et à présenter ici mes réalisations."
     ],
     facts: [
-      { label: "Statut",        value: "Étudiant" },
-      { label: "Disponibilité", value: "Stage" },
-      { label: "Langue",        value: "Français (natif)" },
-      { label: "Localisation",  value: "Toulouse, France" }
+      { label: "Âge", value: "16 ans" },
+      { label: "Statut", value: "Lycéen" },
+      { label: "Formation", value: "CIEL" },
+      { label: "Localisation", value: "Toulouse, France" }
     ],
     goals: [
-      "Approfondir le développement d'applications robustes et maintenables.",
-      "Monter en compétence sur la sécurité des systèmes et des réseaux.",
-      "Contribuer à des projets réels en équipe lors d'un stage."
+      {
+        text: "Approfondir Python en réalisant des scripts et des projets personnels.",
+        source: "https://docs.python.org/fr/3/tutorial/index.html",
+        sourceLabel: "Tutoriel officiel Python"
+      },
+      {
+        text: "Continuer à créer et améliorer mes bots Telegram et Discord.",
+        source: "https://core.telegram.org/bots/api",
+        sourceLabel: "Documentation Telegram Bot API"
+      },
+      {
+        text: "Apprendre à protéger les comptes et les données avec des mots de passe robustes et uniques.",
+        source: "https://www.cnil.fr/fr/les-conseils-de-la-cnil-pour-un-bon-mot-de-passe",
+        sourceLabel: "Conseils de la CNIL"
+      },
+      {
+        text: "Découvrir et appliquer les bonnes pratiques d’hygiène informatique recommandées par l’ANSSI.",
+        source: "https://messervices.cyber.gouv.fr/guides/guide-dhygiene-informatique",
+        sourceLabel: "Guide d’hygiène informatique de l’ANSSI"
+      }
     ]
   },
 
-
-  /* ---------- COMPÉTENCES ----------
-     Retire ou ajoute librement des items. */
   skills: [
-    { category: "Développement",   icon: "code",     items: ["C", "C++", "Java", "POO", "Algorithmique"] },
-    { category: "Web",             icon: "web",      items: ["HTML5", "CSS3", "JavaScript", "Responsive", "Git"] },
-    { category: "Python",          icon: "python",   items: ["Python", "Scripts d'automatisation", "Analyse de données"] },
-    { category: "Linux",           icon: "terminal", items: ["Bash", "Administration", "Services", "Système de fichiers"] },
-    { category: "Réseaux",         icon: "network",  items: ["TCP/IP", "DNS", "DHCP", "Routage", "Sous-réseaux"] },
-    { category: "Cybersécurité",   icon: "shield",   items: ["Bonnes pratiques", "Analyse de vulnérabilités", "Sécurisation système"] },
-    { category: "Hardware",        icon: "cpu",      items: ["Assemblage", "Dépannage", "Architecture"] },
-    { category: "Outils / Logiciels", icon: "tool",  items: ["VS Code", "Wireshark", "VirtualBox", "Office"] }
+    { category: "Informatique", icon: "code", items: ["Découverte des bases", "En cours d’apprentissage"] },
+    { category: "Réseaux", icon: "network", items: ["Premières notions en cours"] },
+    { category: "Cybersécurité", icon: "shield", items: ["Sensibilisation et bonnes pratiques"] },
+    { category: "Électronique", icon: "cpu", items: ["Découverte dans le cadre de la formation"] },
+    { category: "Outils", icon: "tool", items: ["Outils utilisés en cours"] }
   ],
 
-  /* ---------- PROJETS ----------
-     status : "Terminé" | "En cours" | "Recherche"
-     image  : chemin relatif ("assets/projects/1.jpg") ou "" → aperçu généré
-     github / url : "" masque le bouton */
   projects: [
     {
-      name: "Nom du projet 1",
-      description: "Objectif du projet, ton rôle, ce que tu as réellement implémenté. Une ou deux phrases suffisent.",
-      tech: ["HTML", "CSS", "JavaScript"],
-      image: "", github: "", url: "",
-      status: "Terminé"
+      name: "Bot Telegram Multitool",
+      description: "Bot Telegram réunissant des outils OSINT, des outils pour Discord et la création de fiches d’identité.",
+      image: "assets/project-multitool.svg",
+      tech: ["Telegram", "OSINT", "Outils Discord", "Fiche d’identité"]
     },
     {
-      name: "Nom du projet 2",
-      description: "Projet réseau ou système : pare-feu, configuration, supervision, script d'administration…",
-      tech: ["Linux", "Bash", "Réseau"],
-      image: "", github: "", url: "",
-      status: "En cours"
-    },
-    {
-      name: "Nom du projet 3",
-      description: "Projet Python ou cybersécurité : outil d'analyse, automatisation, prototype…",
-      tech: ["Python", "Sécurité"],
-      image: "", github: "", url: "",
-      status: "En cours"
+      name: "Bot Telegram islamique",
+      description: "Bot dédié à la pratique quotidienne : consultation des horaires de prière, lecture ou écoute du Coran et notifications à l’heure de la prière.",
+      image: "assets/project-prayer-bot.svg",
+      tech: ["Telegram", "Horaires de prière", "Coran", "Notifications"]
     }
   ],
 
-  /* ---------- PARCOURS / TIMELINE ----------
-     type : "Formation" | "Stage" | "Expérience" | "Certification" | "Projet" */
   timeline: [
-    { date: "20XX — 20XX", type: "Formation",    title: "Intitulé de ton diplôme",       place: "Établissement", description: "Formation et matières principales." },
-    { date: "20XX — 20XX", type: "Formation",    title: "Intitulé du diplôme précédent", place: "Établissement", description: "Baccalauréat ou autre diplôme — mention si pertinente." },
-    { date: "20XX",        type: "Stage",        title: "Poste occupé (si déjà fait)",   place: "Entreprise",    description: "Missions réelles réalisées pendant le stage." },
-    { date: "20XX",        type: "Certification",title: "Nom de la certification",       place: "Organisme",     description: "Certification obtenue (réseau, sécurité, langage…)." }
+    {
+      date: "Collège",
+      type: "Scolarité",
+      title: "Collège Simone Veil",
+      place: "Parcours scolaire",
+      description: "Scolarité au collège."
+    },
+    {
+      date: "Actuellement",
+      type: "Formation",
+      title: "Lycée Simone de Beauvoir",
+      place: "Gragnague",
+      description: "Après une seconde MTNE, je suis actuellement en première CIEL."
+    },
+    {
+      date: "Stage",
+      type: "Expérience",
+      title: "Stage chez ACTIA AUTOMOTIVE",
+      place: "ACTIA AUTOMOTIVE",
+      description: "Une expérience très enrichissante et agréable."
+    }
   ],
 
-  /* ---------- CV ---------- */
   cv: {
-    file: "assets/cv.pdf",   // ← place ton CV ici sous ce nom
+    file: "assets/cv.pdf",
     education: [
-      { period: "20XX — 20XX", title: "Diplôme en cours",  place: "École / Université" },
-      { period: "20XX — 20XX", title: "Diplôme précédent", place: "Lycée / Établissement" }
+      { period: "Actuellement", title: "Première CIEL (après une seconde MTNE)", place: "Lycée Simone de Beauvoir, Gragnague" }
     ],
     experience: [
-      { period: "20XX", title: "Stage / Mission",      place: "Entreprise", detail: "Résumé des missions." },
-      { period: "20XX", title: "Projet professionnel", place: "Contexte",   detail: "Résumé." }
+      {
+        period: "Stage",
+        title: "Stage",
+        place: "ACTIA AUTOMOTIVE",
+        detail: "Une expérience très enrichissante et agréable."
+      }
     ],
     languages: [
-      { name: "Français", level: "Langue maternelle",   value: 100 },
-      { name: "Anglais",  level: "Technique / courant", value: 65 }
+      { name: "Français", level: "Langue maternelle · courant" },
+      { name: "Anglais", level: "B1" }
     ],
-    certifications: [
-      { name: "Nom de la certification", issuer: "Organisme", year: "20XX" }
-    ],
-    interests: ["Développement web", "Réseaux", "Cybersécurité", "Linux", "Hardware"]
+    certifications: [],
+    interests: [
+      "Informatique",
+      "Réseaux",
+      "Cybersécurité",
+      "Électronique",
+      "Programmation Python",
+      "Bots Telegram et Discord"
+    ]
   },
 
-  /* ---------- CONTACT ---------- */
   contact: {
-    message: "Un stage, une alternance ou une simple question ? Écris-moi, je réponds généralement sous 24 h.",
-    /* Formulaire : mets l'URL de ton service (Formspree, Netlify Forms…).
-       Laisse "" pour que le formulaire ouvre directement ton client mail. */
+    message: "Pour me contacter, vous pouvez m’écrire par email. Le formulaire ouvre votre application de messagerie.",
     formEndpoint: ""
   }
 };
-

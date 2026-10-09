@@ -79,8 +79,13 @@
 
     var goals = document.getElementById('aboutGoals');
     if (goals) {
-      goals.innerHTML = (a.goals || []).map(function (t) {
-        return '<li>' + esc(t) + '</li>';
+      goals.innerHTML = (a.goals || []).map(function (goal) {
+        if (typeof goal === 'string') return '<li>' + esc(goal) + '</li>';
+
+        var source = has(goal.source) && has(goal.sourceLabel)
+          ? '<a class="about__source" href="' + esc(goal.source) + '" target="_blank" rel="noopener noreferrer">' + esc(goal.sourceLabel) + '</a>'
+          : '';
+        return '<li>' + esc(goal.text) + (source ? '<span class="about__source-wrap">' + source + '</span>' : '') + '</li>';
       }).join('');
     }
 
@@ -125,7 +130,13 @@
     var grid = document.getElementById('projectsGrid');
     if (!grid) return;
 
-    grid.innerHTML = (SITE_DATA.projects || []).map(function (pr, i) {
+    var projects = SITE_DATA.projects || [];
+    if (!projects.length) {
+      grid.innerHTML = '<p class="projects__empty">Je n’ai pas encore de projet à présenter. J’ajouterai ici mes travaux de cours au fur et à mesure.</p>';
+      return;
+    }
+
+    grid.innerHTML = projects.map(function (pr, i) {
       var initial = (pr.name || '?').trim().charAt(0).toUpperCase();
 
       var media = has(pr.image)
@@ -157,6 +168,7 @@
         '<article class="project" data-reveal data-reveal-delay="' + (i % 3) * 90 + '">' +
           '<div class="project__media">' + media + badge + '</div>' +
           '<div class="project__body">' +
+            '<span class="project__number">Projet ' + String(i + 1).padStart(2, '0') + '</span>' +
             '<h3 class="project__name">' + esc(pr.name) + '</h3>' +
             '<p class="project__desc">' + esc(pr.description) + '</p>' +
             '<div class="project__tech">' + tech + '</div>' +
@@ -207,40 +219,40 @@
 
     var exp = document.getElementById('cvExperience');
     if (exp) {
-      exp.innerHTML = (cv.experience || []).map(function (e) {
+      var experience = cv.experience || [];
+      exp.innerHTML = experience.length ? experience.map(function (e) {
         return '<li class="cv__item">' +
                  '<span class="cv__period">' + esc(e.period) + '</span>' +
                  '<span class="cv__title">' + esc(e.title) + '</span><br>' +
                  '<span class="cv__place">' + esc(e.place) + '</span>' +
                  (e.detail ? '<p class="cv__detail">' + esc(e.detail) + '</p>' : '') +
                '</li>';
-      }).join('');
+      }).join('') : '<li class="cv__item">Pas encore d’expérience professionnelle.</li>';
     }
 
     var cert = document.getElementById('cvCertifications');
     if (cert) {
-      cert.innerHTML = (cv.certifications || []).map(function (c) {
+      var certifications = cv.certifications || [];
+      cert.innerHTML = certifications.length ? certifications.map(function (c) {
         return '<li class="cv__item">' +
                  '<span class="cv__period">' + esc(c.year) + '</span>' +
                  '<span class="cv__title">' + esc(c.name) + '</span><br>' +
                  '<span class="cv__place">' + esc(c.issuer) + '</span>' +
                '</li>';
-      }).join('');
+      }).join('') : '<li class="cv__item">Aucune certification pour le moment.</li>';
     }
 
     var langs = document.getElementById('cvLanguages');
     if (langs) {
-      langs.innerHTML = (cv.languages || []).map(function (l) {
+      var languages = cv.languages || [];
+      langs.innerHTML = languages.length ? languages.map(function (l) {
         return '<li class="lang">' +
                  '<div class="lang__top">' +
                    '<span class="lang__name">' + esc(l.name) + '</span>' +
                    '<span class="lang__level">' + esc(l.level) + '</span>' +
                  '</div>' +
-                 '<div class="lang__track">' +
-                   '<div class="lang__fill" data-level="' + (Number(l.value) || 0) + '"></div>' +
-                 '</div>' +
                '</li>';
-      }).join('');
+      }).join('') : '<li class="cv__item">À compléter au fil de ma scolarité.</li>';
     }
 
     var interests = document.getElementById('cvInterests');
@@ -250,7 +262,7 @@
       }).join('');
     }
 
-    /* Boutons « Télécharger mon CV » */
+    /* Les liens CV ne sont activés que lorsqu’un vrai fichier est renseigné. */
     if (has(cv.file)) {
       $$('[data-cv-link]').forEach(function (a) { a.setAttribute('href', cv.file); });
     }
@@ -259,7 +271,6 @@
   /* ---------- 7. CONTACT ---------- */
   function renderContact() {
     var p = SITE_DATA.profile || {};
-    var l = SITE_DATA.links || {};
     var c = SITE_DATA.contact || {};
 
     /* Canal non renseigné : devient inerte, sans lien cassé */
@@ -285,32 +296,13 @@
       }
     }
 
-    /* GitHub */
-    var chGit = document.getElementById('channelGithub');
-    if (chGit) {
-      if (has(l.github)) {
-        chGit.href = l.github;
-      } else {
-        emptyChannel(chGit);
-      }
-    }
-
-    /* LinkedIn */
-    var chIn = document.getElementById('channelLinkedin');
-    if (chIn) {
-      if (has(l.linkedin)) {
-        chIn.href = l.linkedin;
-      } else {
-        emptyChannel(chIn);
-      }
-    }
-
     /* Téléphone */
     var chPhone = document.getElementById('channelPhone');
     if (chPhone) {
-      if (has(l.phone)) {
-        chPhone.href = 'tel:' + l.phone.replace(/\s+/g, '');
-        setText('channelPhoneText', l.phone);
+      var phone = (SITE_DATA.links || {}).phone || '';
+      if (has(phone)) {
+        chPhone.href = 'tel:' + phone.replace(/\s+/g, '');
+        setText('channelPhoneText', phone);
       } else {
         emptyChannel(chPhone);
       }
@@ -468,24 +460,6 @@
     els.forEach(function (el) { io.observe(el); });
   }
 
-  /* --- Barres de niveau des langues --- */
-  function initLanguageBars() {
-    var bars = $$('.lang__fill');
-    if (!bars.length) return;
-
-    function fill(bar) { bar.style.width = (Number(bar.getAttribute('data-level')) || 0) + '%'; }
-
-    if (!('IntersectionObserver' in window)) { bars.forEach(fill); return; }
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { fill(e.target); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.5 });
-
-    bars.forEach(function (b) { io.observe(b); });
-  }
-
   /* --- Surbrillance suivant le pointeur (cartes compétences) --- */
   function initPointerGlow() {
     if (prefersReduced || window.matchMedia('(hover: none)').matches) return;
@@ -611,7 +585,6 @@
     initReveal();
     initNav();
     initCounters();
-    initLanguageBars();
     initPointerGlow();
     initTerminalTilt();
     initForm();
@@ -626,5 +599,3 @@
     init();
   }
 })();
-
-

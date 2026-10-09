@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="160" y1="26" x2="1000" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#171717"/>
+      <stop offset=".58" stop-color="#080808"/>
+      <stop offset="1" stop-color="#020202"/>
+    </linearGradient>
+    <radialGradient id="moonGlow" cx="0" cy="0" r="1" gradientTransform="matrix(0 300 -340 0 849 191)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".17"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="phone" x1="348" y1="111" x2="800" y2="698" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#202020"/>
+      <stop offset="1" stop-color="#090909"/>
+    </linearGradient>
+    <pattern id="stars" width="96" height="96" patternUnits="userSpaceOnUse">
+      <circle cx="12" cy="19" r="1.4" fill="#fff" fill-opacity=".42"/>
+      <circle cx="67" cy="63" r="1" fill="#fff" fill-opacity=".32"/>
+      <circle cx="84" cy="12" r=".8" fill="#fff" fill-opacity=".28"/>
+    </pattern>
+    <filter id="shadow" x="267" y="65" width="615" height="735" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="28"/>
+    </filter>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h1200v800H0z"/>
+  <path fill="url(#stars)" d="M0 0h1200v800H0z"/>
+  <path fill="url(#moonGlow)" d="M0 0h1200v800H0z"/>
+  <circle cx="851" cy="192" r="117" stroke="#fff" stroke-opacity=".1"/>
+  <circle cx="851" cy="192" r="151" stroke="#fff" stroke-opacity=".055" stroke-dasharray="2 12"/>
+  <path d="M852 108a83 83 0 1 0 74 120 72 72 0 0 1-74-120Z" fill="#fff" fill-opacity=".88"/>
+  <path d="m1004 129 5 13 13 5-13 5-5 13-5-13-13-5 13-5 5-13ZM727 176l4 10 10 4-10 4-4 10-4-10-10-4 10-4 4-10Z" fill="#fff" fill-opacity=".68"/>
+  <path d="M125 650c171-79 305-79 449-21 158 64 283 66 501-24v195H125V650Z" fill="#fff" fill-opacity=".035"/>
+  <path d="M125 696c177-76 322-65 459-16 143 51 290 52 491-26" stroke="#fff" stroke-opacity=".11"/>
+  <g filter="url(#shadow)" opacity=".58">
+    <rect x="359" y="107" width="434" height="617" rx="48" fill="#fff"/>
+  </g>
+  <rect x="341" y="89" width="434" height="617" rx="48" fill="url(#phone)" stroke="#fff" stroke-opacity=".3" stroke-width="2"/>
+  <rect x="357" y="106" width="402" height="583" rx="35" fill="#050505" stroke="#fff" stroke-opacity=".08"/>
+  <rect x="485" y="119" width="148" height="18" rx="9" fill="#fff" fill-opacity=".12"/>
+  <text x="388" y="173" fill="#fff" fill-opacity=".87" font-family="Arial,sans-serif" font-size="18" font-weight="700">Aujourd’hui</text>
+  <text x="388" y="197" fill="#fff" fill-opacity=".45" font-family="Arial,sans-serif" font-size="12">Horaires de prière</text>
+  <rect x="386" y="218" width="344" height="135" rx="20" fill="#fff" fill-opacity=".065" stroke="#fff" stroke-opacity=".16"/>
+  <circle cx="458" cy="285" r="37" stroke="#fff" stroke-opacity=".18" stroke-width="5"/>
+  <path d="M458 248a37 37 0 0 1 35 26" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <path d="M458 266v20l14 9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="518" y="270" fill="#fff" fill-opacity=".48" font-family="Arial,sans-serif" font-size="12">Prochaine prière</text>
+  <text x="518" y="296" fill="#fff" font-family="Arial,sans-serif" font-size="22" font-weight="700">Maghrib</text>
+  <text x="518" y="321" fill="#fff" fill-opacity=".56" font-family="Arial,sans-serif" font-size="13">Notification activée</text>
+  <rect x="386" y="370" width="344" height="53" rx="13" fill="#fff" fill-opacity=".11"/>
+  <circle cx="411" cy="397" r="5" fill="#fff"/>
+  <text x="429" y="402" fill="#fff" fill-opacity=".9" font-family="Arial,sans-serif" font-size="13">Fajr</text>
+  <text x="682" y="402" fill="#fff" font-family="Arial,sans-serif" font-size="13" text-anchor="end">05:42</text>
+  <rect x="386" y="432" width="344" height="53" rx="13" fill="#fff" fill-opacity=".045"/>
+  <circle cx="411" cy="459" r="5" fill="#fff" fill-opacity=".65"/>
+  <text x="429" y="464" fill="#fff" fill-opacity=".75" font-family="Arial,sans-serif" font-size="13">Dhuhr</text>
+  <text x="682" y="464" fill="#fff" fill-opacity=".8" font-family="Arial,sans-serif" font-size="13" text-anchor="end">13:18</text>
+  <rect x="386" y="494" width="344" height="53" rx="13" fill="#fff" fill-opacity=".045"/>
+  <circle cx="411" cy="521" r="5" fill="#fff" fill-opacity=".65"/>
+  <text x="429" y="526" fill="#fff" fill-opacity=".75" font-family="Arial,sans-serif" font-size="13">Asr</text>
+  <text x="682" y="526" fill="#fff" fill-opacity=".8" font-family="Arial,sans-serif" font-size="13" text-anchor="end">16:41</text>
+  <rect x="386" y="556" width="344" height="53" rx="13" fill="#fff" fill-opacity=".045"/>
+  <circle cx="411" cy="583" r="5" fill="#fff" fill-opacity=".65"/>
+  <text x="429" y="588" fill="#fff" fill-opacity=".75" font-family="Arial,sans-serif" font-size="13">Isha</text>
+  <text x="682" y="588" fill="#fff" fill-opacity=".8" font-family="Arial,sans-serif" font-size="13" text-anchor="end">21:06</text>
+  <rect x="386" y="628" width="344" height="39" rx="12" fill="#fff" fill-opacity=".08"/>
+  <circle cx="414" cy="647" r="8" stroke="#fff" stroke-opacity=".72" stroke-width="1.5"/>
+  <path d="M414 642v5l4 2" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+  <text x="434" y="651" fill="#fff" fill-opacity=".72" font-family="Arial,sans-serif" font-size="11">Rappels quotidiens</text>
+  <path d="M250 332c41-31 57-42 87-40M795 441c40-1 67-11 100-39" stroke="#fff" stroke-opacity=".25" stroke-dasharray="4 9"/>
+  <circle cx="337" cy="292" r="5" fill="#fff" fill-opacity=".8"/>
+  <circle cx="895" cy="402" r="5" fill="#fff" fill-opacity=".8"/>
+  <circle cx="930" cy="488" r="20" stroke="#fff" stroke-opacity=".22"/>
+  <path d="M921 488h18M930 479v18" stroke="#fff" stroke-opacity=".7" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

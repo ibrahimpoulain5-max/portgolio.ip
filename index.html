@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio professionnel — étudiant en informatique, développement, réseaux et cybersécurité. Recherche de stage.">
-  <meta name="theme-color" content="#07090d">
-  <title>Portfolio — Étudiant en informatique</title>
+  <meta name="description" content="Portfolio d’Ibrahim, lycéen de 16 ans qui découvre la formation CIEL : cybersécurité, informatique, réseaux et électronique.">
+  <meta name="theme-color" content="#000000">
+  <title>Portfolio — Lycéen en formation CIEL</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%230b0f16'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='%235eead4' font-family='monospace'>_</text></svg>">
@@ -36,7 +36,7 @@
       </nav>
 
       <div class="nav__actions">
-        <a href="#contact" class="btn btn--sm btn--primary nav__cta">Me contacter</a>
+        <a href="assets/cv.pdf" class="btn btn--sm btn--primary nav__cv" data-cv-link download="CV-Ibrahim-Poulain.pdf">Télécharger CV</a>
         <button class="nav__burger" id="navBurger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
           <span></span><span></span><span></span>
         </button>
@@ -56,30 +56,26 @@
         <div class="hero__content">
           <p class="hero__badge" data-reveal>
             <span class="pulse-dot"></span>
-            <span id="heroBadge">Recherche un stage</span>
+            <span id="heroBadge">En apprentissage</span>
           </p>
 
           <h1 class="hero__title" data-reveal data-reveal-delay="80">
             <span class="hero__hello">Bonjour, je suis</span>
-            <span class="hero__name" id="heroName">Prénom NOM</span>
+            <span class="hero__name" id="heroName">Ibrahim POULAIN</span>
           </h1>
 
           <p class="hero__role" data-reveal data-reveal-delay="160">
-            <span id="heroStatus">Étudiant en informatique</span>
+            <span id="heroStatus">Élève en lycée polyvalent</span>
             <span class="hero__role-sep">/</span>
-            <span id="heroDomain">Développement · Réseaux · Cybersécurité</span>
+            <span id="heroDomain">Formation CIEL · informatique · réseaux · électronique</span>
           </p>
 
-          <p class="hero__tagline" data-reveal data-reveal-delay="240" id="heroTagline"></p>
+          <p class="hero__tagline" data-reveal data-reveal-delay="240" id="heroTagline">Le numérique me passionne et je m’y intéresse aussi chez moi à travers des projets personnels. En première CIEL, j’approfondis mes connaissances en informatique, réseaux, cybersécurité et électronique.</p>
 
           <div class="hero__actions" data-reveal data-reveal-delay="320">
             <a href="#projects" class="btn btn--primary">
               Voir mon portfolio
               <svg viewBox="0 0 24 24" class="btn__icon" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="assets/cv.pdf" download class="btn btn--ghost" data-cv-link>
-              Télécharger mon CV
-              <svg viewBox="0 0 24 24" class="btn__icon" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
             <a href="#contact" class="btn btn--outline">Me contacter</a>
           </div>
@@ -87,11 +83,11 @@
           <div class="hero__meta" data-reveal data-reveal-delay="400">
             <div class="hero__meta-item">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 10-14 0c0 5.5 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-              <span id="heroLocation">Ville, Pays</span>
+              <span id="heroLocation">Toulouse, France</span>
             </div>
             <div class="hero__meta-item">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-              <a href="#" id="heroEmail">email@exemple.com</a>
+              <a href="mailto:ibrahimpoulain5@gmail.com" id="heroEmail">ibrahimpoulain5@gmail.com</a>
             </div>
           </div>
         </div>
@@ -107,11 +103,11 @@
             </div>
             <div class="terminal__body">
               <p><span class="t-prompt">➜</span> <span class="t-path">~</span> whoami</p>
-              <p class="t-out" id="tWhoami">etudiant_informatique</p>
+              <p class="t-out" id="tWhoami">ibrahim</p>
               <p><span class="t-prompt">➜</span> <span class="t-path">~</span> cat focus.txt</p>
-              <p class="t-out" id="tFocus">développement · réseaux · cybersécurité</p>
+              <p class="t-out" id="tFocus">formation ciel · informatique · réseaux · électronique</p>
               <p><span class="t-prompt">➜</span> <span class="t-path">~</span> ./looking_for.sh --stage</p>
-              <p class="t-out t-ok" id="tStatus">[ok] disponible pour un stage</p>
+              <p class="t-out t-ok" id="tStatus">[ok] en apprentissage</p>
               <p><span class="t-prompt">➜</span> <span class="t-path">~</span> <span class="t-cursor"></span></p>
             </div>
           </div>
@@ -156,16 +152,16 @@
 
             <div class="about__stats">
               <div class="stat">
-                <span class="stat__value" data-count="8">0</span>
-                <span class="stat__label">domaines techniques</span>
+                <span class="stat__value" data-count="16">16</span>
+                <span class="stat__label">ans</span>
               </div>
               <div class="stat">
-                <span class="stat__value" data-count="100">0</span>
-                <span class="stat__label">% autodidacte</span>
+                <span class="stat__value" data-count="1">1</span>
+                <span class="stat__label">formation CIEL</span>
               </div>
               <div class="stat">
-                <span class="stat__value" data-count="1">0</span>
-                <span class="stat__label">objectif : un stage</span>
+                <span class="stat__value" data-count="0">0</span>
+                <span class="stat__label">expérience professionnelle</span>
               </div>
             </div>
           </aside>
@@ -179,7 +175,7 @@
         <header class="section__head" data-reveal>
           <span class="section__index">02</span>
           <h2 class="section__title">Compétences</h2>
-          <p class="section__subtitle">Les technologies et outils sur lesquels je travaille.</p>
+          <p class="section__subtitle">Les domaines que je découvre et que j’apprends au lycée.</p>
         </header>
 
         <div class="skills" id="skillsGrid"></div>
@@ -193,7 +189,7 @@
         <header class="section__head" data-reveal>
           <span class="section__index">03</span>
           <h2 class="section__title">Projets</h2>
-          <p class="section__subtitle">Une sélection de réalisations techniques.</p>
+          <p class="section__subtitle">Mes exercices et projets scolaires seront ajoutés au fur et à mesure.</p>
         </header>
 
         <div class="projects" id="projectsGrid"></div>
@@ -206,7 +202,7 @@
         <header class="section__head" data-reveal>
           <span class="section__index">04</span>
           <h2 class="section__title">Parcours</h2>
-          <p class="section__subtitle">Formation, expériences et certifications.</p>
+          <p class="section__subtitle">Mon parcours scolaire, qui se construit actuellement.</p>
         </header>
 
         <div class="timeline" id="timelineList"></div>
@@ -219,7 +215,7 @@
         <header class="section__head" data-reveal>
           <span class="section__index">05</span>
           <h2 class="section__title">CV</h2>
-          <p class="section__subtitle">L'essentiel de mon parcours, en un coup d'œil.</p>
+          <p class="section__subtitle">Ma formation et les informations utiles sur mon parcours.</p>
         </header>
 
         <div class="cv">
@@ -260,9 +256,9 @@
               <div class="cv__tags" id="cvInterests"></div>
             </article>
 
-            <a href="assets/cv.pdf" download class="btn btn--primary btn--block" data-cv-link data-reveal data-reveal-delay="240">
-              Télécharger le CV (PDF)
-              <svg viewBox="0 0 24 24" class="btn__icon" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 19h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <a href="assets/cv.pdf" class="btn btn--primary" data-cv-link download="CV-Ibrahim-Poulain.pdf">
+              Télécharger mon CV
+              <svg viewBox="0 0 24 24" class="btn__icon" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 17v3h14v-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
           </aside>
         </div>
@@ -275,7 +271,7 @@
         <header class="section__head" data-reveal>
           <span class="section__index">06</span>
           <h2 class="section__title">Contact</h2>
-          <p class="section__subtitle" id="contactMessage">Une question ou une opportunité ? Écrivez-moi.</p>
+          <p class="section__subtitle" id="contactMessage">Une question sur ma formation ? Écrivez-moi.</p>
         </header>
 
         <div class="contact">
@@ -286,29 +282,7 @@
               </span>
               <span class="channel__body">
                 <span class="channel__label">Email</span>
-                <span class="channel__value" id="channelEmailText">prenom.nom@exemple.com</span>
-              </span>
-              <svg class="channel__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-
-            <a class="channel" id="channelGithub" href="#" target="_blank" rel="noopener">
-              <span class="channel__icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4 1.5-4-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 00-1.3-3.2 4.3 4.3 0 00-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 00-6 0C6.2 2.8 5.1 3.1 5.1 3.1a4.3 4.3 0 00-.1 3.2A4.6 4.6 0 003.7 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </span>
-              <span class="channel__body">
-                <span class="channel__label">GitHub</span>
-                <span class="channel__value">Voir mes dépôts</span>
-              </span>
-              <svg class="channel__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-
-            <a class="channel" id="channelLinkedin" href="#" target="_blank" rel="noopener">
-              <span class="channel__icon">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10.5V17M8 7.5v.01M12 17v-4a2 2 0 014 0v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-              </span>
-              <span class="channel__body">
-                <span class="channel__label">LinkedIn</span>
-                <span class="channel__value">Me contacter professionnellement</span>
+                <span class="channel__value" id="channelEmailText">ibrahimpoulain5@gmail.com</span>
               </span>
               <svg class="channel__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
@@ -323,10 +297,15 @@
               </span>
               <svg class="channel__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
+
+            <aside class="contact__note">
+              <span class="contact__note-mark" aria-hidden="true">↗</span>
+              <div>
+                <h3>Un échange autour du numérique ?</h3>
+                <p>Tu peux me contacter pour parler de ma formation, de mes projets personnels ou de mes centres d’intérêt.</p>
+              </div>
+            </aside>
           </div>
-
-
-
 
           <form class="form" id="contactForm" novalidate data-reveal data-reveal-delay="120">
             <div class="form__row">
@@ -342,7 +321,7 @@
 
             <div class="field">
               <label for="fSubject">Sujet</label>
-              <input type="text" id="fSubject" name="subject" required placeholder="Stage, alternance, question…">
+              <input type="text" id="fSubject" name="subject" required placeholder="Question sur ma formation…">
             </div>
 
             <div class="field">
@@ -368,7 +347,7 @@
     <div class="container footer__inner">
       <div class="footer__brand">
         <span class="nav__logo-mark" id="footerInitials">_</span>
-        <p>Conçu et développé en HTML, CSS et JavaScript — sans framework.</p>
+        <p>Portfolio personnel, mis à jour au fil de ma formation.</p>
       </div>
       <nav class="footer__nav" aria-label="Pied de page">
         <a href="#about">À propos</a>
@@ -389,4 +368,3 @@
   <script src="js/main.js"></script>
 </body>
 </html>
-
