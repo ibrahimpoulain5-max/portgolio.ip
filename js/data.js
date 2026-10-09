@@ -74,6 +74,12 @@ const SITE = {
       tech: ["Telegram", "OSINT", "Outils Discord", "Fiche d’identité"]
     },
     {
+      name: "Multitool Python en CLI",
+      description: "Version en ligne de commande du Multitool, avec les mêmes fonctionnalités : outils OSINT, outils pour Discord et création de fiches d’identité.",
+      image: "assets/project-python-cli.svg",
+      tech: ["Python", "CLI", "OSINT", "Outils Discord", "Fiche d’identité"]
+    },
+    {
       name: "Bot Telegram islamique",
       description: "Bot dédié à la pratique quotidienne : consultation des horaires de prière, lecture ou écoute du Coran et notifications à l’heure de la prière.",
       image: "assets/project-prayer-bot.svg",

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="100" y1="0" x2="1040" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#171717"/>
+      <stop offset=".55" stop-color="#070707"/>
+      <stop offset="1" stop-color="#020202"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="238" y1="133" x2="989" y2="693" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#171717"/>
+      <stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(0 405 -540 0 849 71)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity=".12"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0v40" stroke="#fff" stroke-opacity=".045"/>
+    </pattern>
+    <filter id="shadow" x="175" y="100" width="850" height="670" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="25"/>
+    </filter>
+  </defs>
+  <path fill="url(#bg)" d="M0 0h1200v800H0z"/>
+  <path fill="url(#grid)" d="M0 0h1200v800H0z"/>
+  <path fill="url(#glow)" d="M0 0h1200v800H0z"/>
+  <circle cx="600" cy="400" r="285" stroke="#fff" stroke-opacity=".035"/>
+  <circle cx="600" cy="400" r="340" stroke="#fff" stroke-opacity=".04" stroke-dasharray="2 13"/>
+  <g filter="url(#shadow)" opacity=".56">
+    <rect x="223" y="147" width="754" height="535" rx="26" fill="#fff"/>
+  </g>
+  <rect x="209" y="130" width="782" height="544" rx="22" fill="url(#panel)" stroke="#fff" stroke-opacity=".25" stroke-width="2"/>
+  <path d="M210 152a22 22 0 0 1 22-22h738a22 22 0 0 1 22 22v51H210v-51Z" fill="#fff" fill-opacity=".055"/>
+  <path d="M210 204h780" stroke="#fff" stroke-opacity=".13"/>
+  <circle cx="246" cy="168" r="7" fill="#fff" fill-opacity=".9"/>
+  <circle cx="271" cy="168" r="7" fill="#fff" fill-opacity=".55"/>
+  <circle cx="296" cy="168" r="7" fill="#fff" fill-opacity=".28"/>
+  <text x="329" y="174" fill="#fff" fill-opacity=".48" font-family="monospace" font-size="13">ibrahim@multitool: ~</text>
+  <rect x="237" y="228" width="726" height="414" rx="11" fill="#020202" stroke="#fff" stroke-opacity=".08"/>
+  <text x="269" y="267" fill="#fff" fill-opacity=".7" font-family="monospace" font-size="14">$ python multitool.py</text>
+  <text x="269" y="305" fill="#fff" font-family="monospace" font-size="18" font-weight="700">MULTITOOL // Python CLI</text>
+  <path d="M269 321h650" stroke="#fff" stroke-opacity=".17"/>
+  <text x="269" y="356" fill="#fff" fill-opacity=".54" font-family="monospace" font-size="12">Sélectionne un module :</text>
+  <rect x="260" y="375" width="350" height="47" rx="8" fill="#fff" fill-opacity=".12" stroke="#fff" stroke-opacity=".22"/>
+  <text x="279" y="405" fill="#fff" font-family="monospace" font-size="13">&gt; 01  Outils OSINT</text>
+  <rect x="260" y="432" width="350" height="47" rx="8" fill="#fff" fill-opacity=".035"/>
+  <text x="279" y="462" fill="#fff" fill-opacity=".68" font-family="monospace" font-size="13">  02  Outils pour Discord</text>
+  <rect x="260" y="489" width="350" height="47" rx="8" fill="#fff" fill-opacity=".035"/>
+  <text x="279" y="519" fill="#fff" fill-opacity=".68" font-family="monospace" font-size="13">  03  Fiche d’identité</text>
+  <rect x="260" y="558" width="350" height="43" rx="8" fill="#fff" fill-opacity=".035"/>
+  <text x="279" y="585" fill="#fff" fill-opacity=".48" font-family="monospace" font-size="12">  00  Quitter</text>
+  <rect x="632" y="375" width="299" height="226" rx="12" fill="#fff" fill-opacity=".035" stroke="#fff" stroke-opacity=".13"/>
+  <text x="658" y="411" fill="#fff" fill-opacity=".85" font-family="monospace" font-size="13">[ module actif ]</text>
+  <path d="M658 427h242" stroke="#fff" stroke-opacity=".13"/>
+  <text x="658" y="461" fill="#fff" fill-opacity=".52" font-family="monospace" font-size="11">Chargement des outils...</text>
+  <text x="658" y="490" fill="#fff" fill-opacity=".82" font-family="monospace" font-size="11">[ OK ] Environnement prêt</text>
+  <text x="658" y="519" fill="#fff" fill-opacity=".55" font-family="monospace" font-size="11">[ OK ] Module sélectionné</text>
+  <text x="658" y="563" fill="#fff" fill-opacity=".86" font-family="monospace" font-size="12">&gt;_</text>
+  <path d="M314 695h572" stroke="#fff" stroke-opacity=".16"/>
+</svg>
