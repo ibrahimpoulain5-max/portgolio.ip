@@ -16,6 +16,8 @@
 </head>
 <body>
 
+  <canvas class="starfield" aria-hidden="true"></canvas>
+  <canvas class="cursor-fx" aria-hidden="true"></canvas>
   <a class="skip-link" href="#about">Aller au contenu</a>
 
   <!-- ===== NAVIGATION ===== -->
@@ -352,6 +354,10 @@
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
+    <div class="footer__matrix" aria-hidden="true">
+      <canvas class="footer__matrix-canvas"></canvas>
+      <span class="footer__matrix-label">END OF LINE <span>//</span> SYSTEM IDLE</span>
+    </div>
     <div class="container footer__inner">
       <div class="footer__brand">
         <span class="nav__logo-mark" id="footerInitials">_</span>

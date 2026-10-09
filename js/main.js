@@ -316,6 +316,291 @@
 
   var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* --- Ciel étoilé : rotation et couleurs liées au défilement --- */
+  function initStarfield() {
+    var canvas = $('.starfield');
+    if (!canvas) return;
+
+    var context = canvas.getContext('2d');
+    if (!context) return;
+
+    var stars = [];
+    var width = 0;
+    var height = 0;
+    var ratio = 1;
+    var scrollY = window.scrollY || window.pageYOffset;
+    var frame = 0;
+    var lastFrame = 0;
+    var running = false;
+
+    function draw(now) {
+      frame = 0;
+      if (document.hidden) {
+        running = false;
+        return;
+      }
+      if (!prefersReduced && now - lastFrame < 32) {
+        frame = requestAnimationFrame(draw);
+        return;
+      }
+      lastFrame = now;
+      context.clearRect(0, 0, width, height);
+
+      var rotation = prefersReduced ? 0 : scrollY * 0.00065;
+      var cos = Math.cos(rotation);
+      var sin = Math.sin(rotation);
+      var hueShift = scrollY * 0.14;
+
+      stars.forEach(function (star) {
+        var dx = star.x - width / 2;
+        var dy = star.y - height / 2;
+        var x = ((dx * cos - dy * sin + width / 2) % width + width) % width;
+        var y = ((dx * sin + dy * cos + height / 2) % height + height) % height;
+        var twinkle = prefersReduced ? 1 : 0.58 + Math.sin(now * 0.002 + star.phase) * 0.32;
+        var hue = (star.hue + hueShift) % 360;
+        var radius = star.size * (star.large ? 1 : 0.72);
+        var alpha = star.opacity * twinkle;
+
+        context.save();
+        context.translate(x, y);
+        context.rotate((prefersReduced ? 0 : now * star.spin) + rotation);
+        context.globalAlpha = alpha;
+        context.fillStyle = 'hsl(' + hue + ', 96%, 78%)';
+        if (star.large) {
+          context.shadowColor = 'hsl(' + hue + ', 100%, 70%)';
+          context.shadowBlur = radius * 5;
+        }
+        context.beginPath();
+        for (var point = 0; point < 8; point++) {
+          var angle = (Math.PI / 4) * point - Math.PI / 2;
+          var pointRadius = point % 2 === 0 ? radius : radius * 0.24;
+          var px = Math.cos(angle) * pointRadius;
+          var py = Math.sin(angle) * pointRadius;
+          if (point === 0) context.moveTo(px, py);
+          else context.lineTo(px, py);
+        }
+        context.closePath();
+        context.fill();
+        context.restore();
+      });
+
+      if (!prefersReduced && running) frame = requestAnimationFrame(draw);
+    }
+
+    function resize() {
+      ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      var count = Math.max(38, Math.min(150, Math.round(width * height / 8500)));
+      stars = Array.from({ length: count }, function () {
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: 0.8 + Math.random() * 2.1,
+          opacity: 0.28 + Math.random() * 0.58,
+          hue: 175 + Math.random() * 190,
+          phase: Math.random() * Math.PI * 2,
+          spin: (Math.random() - 0.5) * 0.0015,
+          large: Math.random() > 0.78
+        };
+      });
+      draw(performance.now());
+    }
+
+    function start() {
+      if (running || document.hidden || prefersReduced) return;
+      running = true;
+      lastFrame = 0;
+      frame = requestAnimationFrame(draw);
+    }
+
+    function stop() {
+      running = false;
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+    }
+
+    window.addEventListener('scroll', function () {
+      scrollY = window.scrollY || window.pageYOffset;
+      if (prefersReduced) draw(performance.now());
+    }, { passive: true });
+    window.addEventListener('resize', resize, { passive: true });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop();
+      else start();
+    });
+
+    resize();
+    start();
+  }
+
+  /* --- Traînée lumineuse et petites particules au clic --- */
+  function initCyberCursor() {
+    if (prefersReduced || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    var canvas = $('.cursor-fx');
+    if (!canvas) return;
+
+    var context = canvas.getContext('2d');
+    if (!context) return;
+
+    var width = 0;
+    var height = 0;
+    var ratio = 1;
+    var particles = [];
+    var frame = 0;
+    var lastFrame = 0;
+    var previousX = -100;
+    var previousY = -100;
+    var hasPreviousPosition = false;
+
+    function resize() {
+      ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    function addParticles(x, y, count, burst) {
+      for (var i = 0; i < count; i++) {
+        var angle = burst
+          ? Math.random() * Math.PI * 2
+          : Math.atan2(y - previousY, x - previousX) + Math.PI + (Math.random() - 0.5) * 1.2;
+        var speed = burst ? 0.7 + Math.random() * 2 : 0.15 + Math.random() * 0.5;
+        particles.push({
+          x: x,
+          y: y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          size: 0.7 + Math.random() * (burst ? 1.2 : 0.7),
+          life: 0.25 + Math.random() * (burst ? 0.25 : 0.15),
+          hue: 180 + Math.random() * 18
+        });
+      }
+      if (particles.length > 45) particles.splice(0, particles.length - 45);
+      if (!frame && !document.hidden) frame = requestAnimationFrame(draw);
+    }
+
+    function draw(now) {
+      frame = 0;
+      if (document.hidden) return;
+      if (now - lastFrame < 30) {
+        frame = requestAnimationFrame(draw);
+        return;
+      }
+      lastFrame = now;
+      context.clearRect(0, 0, width, height);
+      particles = particles.filter(function (particle) {
+        particle.life -= 0.025;
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        particle.vx *= 0.97;
+        particle.vy *= 0.97;
+        if (particle.life <= 0) return false;
+        context.globalAlpha = Math.min(0.34, particle.life * 0.7);
+        context.fillStyle = 'hsl(' + particle.hue + ', 72%, 74%)';
+        context.shadowColor = context.fillStyle;
+        context.shadowBlur = 4;
+        context.beginPath();
+        context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        context.fill();
+        return true;
+      });
+      context.globalAlpha = 1;
+      context.shadowBlur = 0;
+      if (particles.length) frame = requestAnimationFrame(draw);
+    }
+
+    document.addEventListener('pointermove', function (event) {
+      if (event.pointerType !== 'mouse') return;
+      if (hasPreviousPosition) {
+        var dx = event.clientX - previousX;
+        var dy = event.clientY - previousY;
+        var distance = Math.sqrt(dx * dx + dy * dy);
+        if (distance > 5) {
+          var count = Math.min(2, Math.floor(distance / 18) + 1);
+          for (var i = 0; i < count; i++) {
+            var progress = (i + 1) / count;
+            addParticles(previousX + dx * progress, previousY + dy * progress, 1, false);
+          }
+        }
+      }
+      previousX = event.clientX;
+      previousY = event.clientY;
+      hasPreviousPosition = true;
+      if (!frame) frame = requestAnimationFrame(draw);
+    }, { passive: true });
+    document.addEventListener('pointerdown', function (event) {
+      if (event.pointerType === 'mouse') addParticles(event.clientX, event.clientY, 10, true);
+    });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        particles = [];
+        if (frame) cancelAnimationFrame(frame);
+        frame = 0;
+        context.clearRect(0, 0, width, height);
+      }
+    });
+    window.addEventListener('resize', resize, { passive: true });
+
+    resize();
+  }
+
+  /* --- Défilement inertiel léger à la molette --- */
+  function initWheelGlide() {
+    if (prefersReduced) return;
+
+    var velocity = 0;
+    var frame = 0;
+    var lastTime = 0;
+
+    function step(now) {
+      frame = 0;
+      var elapsed = lastTime ? Math.min((now - lastTime) / 16.67, 2) : 1;
+      lastTime = now;
+      if (Math.abs(velocity) < 0.35) {
+        velocity = 0;
+        lastTime = 0;
+        return;
+      }
+
+      var current = window.scrollY || window.pageYOffset;
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      var next = Math.max(0, Math.min(maxScroll, current + velocity * elapsed));
+      window.scrollTo({ top: next, behavior: 'instant' });
+      velocity *= Math.pow(0.88, elapsed);
+
+      if (next === 0 || next === maxScroll) velocity = 0;
+      if (Math.abs(velocity) >= 0.35) frame = requestAnimationFrame(step);
+      else {
+        velocity = 0;
+        lastTime = 0;
+      }
+    }
+
+    window.addEventListener('wheel', function (event) {
+      if (event.ctrlKey || event.metaKey || !event.deltaY || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      if (event.target instanceof Element &&
+          event.target.closest('input, textarea, select, [contenteditable="true"], .nav__links.is-open')) return;
+
+      var current = window.scrollY || window.pageYOffset;
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if ((current <= 0 && event.deltaY < 0) || (current >= maxScroll && event.deltaY > 0)) return;
+
+      event.preventDefault();
+      velocity = Math.max(-30, Math.min(30, velocity + event.deltaY * 0.14));
+      if (!frame) {
+        lastTime = 0;
+        frame = requestAnimationFrame(step);
+      }
+    }, { passive: false });
+  }
+
   /* --- Apparitions au scroll (IntersectionObserver) --- */
   function initReveal() {
     var els = $$('[data-reveal]');
@@ -347,6 +632,49 @@
         io.observe(el);
       }
     });
+  }
+
+  /* --- Déchiffrement des titres lorsqu'ils entrent dans l'écran --- */
+  function initTextDecode() {
+    if (prefersReduced || !('IntersectionObserver' in window)) return;
+
+    var els = $$('.section__title, .hero__name');
+    var alphabet = '01<>[]{}#/*';
+
+    function decode(el) {
+      var original = el.textContent;
+      var started = performance.now();
+      var duration = 820;
+      el.setAttribute('aria-label', original);
+      el.classList.add('is-decoding');
+
+      function step(now) {
+        var progress = Math.min((now - started) / duration, 1);
+        var resolved = Math.floor(progress * original.length);
+        el.textContent = original.split('').map(function (char, index) {
+          if (char === ' ' || index < resolved) return char;
+          return alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        }).join('');
+
+        if (progress < 1) requestAnimationFrame(step);
+        else {
+          el.textContent = original;
+          el.classList.remove('is-decoding');
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          decode(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    els.forEach(function (el) { observer.observe(el); });
   }
 
   /* --- Navigation : état scrollé, barre de progression, section active, menu mobile --- */
@@ -433,15 +761,28 @@
 
     function animate(el) {
       var target = Number(el.getAttribute('data-count')) || 0;
+      el.setAttribute('aria-label', String(target));
       if (prefersReduced) { el.textContent = target; return; }
 
       var start = performance.now();
-      var dur = 1200;
+      var dur = 1450;
+      var scrambleDuration = 520;
+      el.classList.add('is-counting');
       function step(now) {
         var t = Math.min((now - start) / dur, 1);
-        var eased = 1 - Math.pow(1 - t, 3);   // ease-out cubic
-        el.textContent = Math.round(target * eased);
-        if (t < 1) requestAnimationFrame(step);
+        if (t < scrambleDuration / dur) {
+          el.textContent = String(Math.floor(Math.random() * Math.pow(10, String(target).length)));
+        } else {
+          var countProgress = (t - scrambleDuration / dur) / (1 - scrambleDuration / dur);
+          var eased = 1 - Math.pow(1 - countProgress, 3);
+          el.textContent = Math.round(target * eased);
+        }
+        if (t < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = String(target);
+          el.classList.remove('is-counting');
+        }
       }
       requestAnimationFrame(step);
     }
@@ -458,6 +799,131 @@
     }, { threshold: 0.6 });
 
     els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* --- Mouvement 3D discret des cartes au pointeur --- */
+  function initCardTilt() {
+    if (prefersReduced || window.matchMedia('(hover: none)').matches) return;
+
+    $$('.project, .skill, .tl-card, .cv__block, .stat, .about__card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty('--tilt-x', (x * 5).toFixed(2) + 'deg');
+        card.style.setProperty('--tilt-y', (y * -5).toFixed(2) + 'deg');
+        card.classList.add('is-tilting');
+      }, { passive: true });
+
+      card.addEventListener('pointerleave', function () {
+        card.classList.remove('is-tilting');
+        card.style.removeProperty('--tilt-x');
+        card.style.removeProperty('--tilt-y');
+      }, { passive: true });
+    });
+  }
+
+  /* --- Pluie Matrix monochrome dans le pied de page --- */
+  function initMatrixRain() {
+    if (prefersReduced) return;
+
+    var host = $('.footer__matrix');
+    var canvas = $('.footer__matrix-canvas', host);
+    if (!host || !canvas) return;
+
+    var context = canvas.getContext('2d');
+    if (!context) return;
+
+    var chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ';
+    var fontSize = 13;
+    var streams = [];
+    var width = 0;
+    var height = 0;
+    var frame = 0;
+    var lastFrame = 0;
+    var running = false;
+
+    function resize() {
+      var rect = host.getBoundingClientRect();
+      var ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+      width = Math.max(1, rect.width);
+      height = Math.max(1, rect.height);
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      context.fillStyle = '#000';
+      context.fillRect(0, 0, width, height);
+      var count = Math.ceil(width / fontSize);
+      streams = Array.from({ length: count }, function (_, i) {
+        return {
+          x: i * fontSize,
+          y: Math.random() * height,
+          speed: 0.35 + Math.random() * 0.9,
+          opacity: 0.18 + Math.random() * 0.52
+        };
+      });
+    }
+
+    function draw(now) {
+      frame = 0;
+      if (!running || document.hidden) {
+        running = false;
+        return;
+      }
+      if (now - lastFrame < 34) {
+        frame = requestAnimationFrame(draw);
+        return;
+      }
+      lastFrame = now;
+      context.fillStyle = 'rgba(0, 0, 0, 0.14)';
+      context.fillRect(0, 0, width, height);
+      context.font = fontSize + 'px monospace';
+
+      streams.forEach(function (stream) {
+        var char = chars.charAt(Math.floor(Math.random() * chars.length));
+        context.fillStyle = 'rgba(235, 235, 235, ' + stream.opacity + ')';
+        context.fillText(char, stream.x, stream.y);
+        stream.y -= stream.speed;
+        if (stream.y < -fontSize) {
+          stream.y = height + Math.random() * height * 0.35;
+          stream.speed = 0.35 + Math.random() * 0.9;
+          stream.opacity = 0.18 + Math.random() * 0.52;
+        }
+      });
+      frame = requestAnimationFrame(draw);
+    }
+
+    function start() {
+      if (running || document.hidden) return;
+      running = true;
+      lastFrame = 0;
+      frame = requestAnimationFrame(draw);
+    }
+
+    function stop() {
+      running = false;
+      if (frame) cancelAnimationFrame(frame);
+      frame = 0;
+    }
+
+    resize();
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) start();
+        else stop();
+      });
+      observer.observe(host);
+    } else {
+      start();
+    }
+    window.addEventListener('resize', resize, { passive: true });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop();
+      else {
+        var rect = host.getBoundingClientRect();
+        if (!('IntersectionObserver' in window) || (rect.top < window.innerHeight && rect.bottom > 0)) start();
+      }
+    });
   }
 
   /* --- Surbrillance suivant le pointeur (cartes compétences) --- */
@@ -582,11 +1048,17 @@
     renderCv();
     renderContact();
 
+    initStarfield();
+    initCyberCursor();
+    initWheelGlide();
     initReveal();
+    initTextDecode();
     initNav();
     initCounters();
+    initCardTilt();
     initPointerGlow();
     initTerminalTilt();
+    initMatrixRain();
     initForm();
 
     var y = document.getElementById('year');
